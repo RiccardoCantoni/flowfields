@@ -72,7 +72,7 @@ PVector[] generateFlowfield(){
   float angle, noise;
   float zval = random(0,100000);
   for (int x=0; x<width; x++){
-    for (int y=0; y<width; y++){
+    for (int y=0; y<height; y++){
       noise = pow((noise(x*PERLIN_SAMPLING_SCALE, y*PERLIN_SAMPLING_SCALE, zval)+0.5f),PERLIN_POW)-0.5f;
       angle = noise*TWO_PI;
       field[x*height+y]=PVector.fromAngle(angle).mult(FORCE);
