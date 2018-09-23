@@ -6,13 +6,13 @@ float PERLIN_POW = 3;
 float FORCE = 7;
 float PARTICLE_NOISE_FORCE = 0.5f;
 int PARTICLE_TTL = 75;
-boolean PERLIN_COLOR = false;
+boolean PERLIN_COLOR = true;
 color BACKGROUND_COLOR = color(50,50,50);
 color PARTICLE_COLOR_START_NEG = color(50,50,50);
 color PARTICLE_COLOR_END_NEG = color(132, 105, 51);
 color PARTICLE_COLOR_START_POS = color(50,50,50);
-color PARTICLE_COLOR_END_POS = color(221, 173, 13);
-String OUTPUT_IMAGE = "output.jpg";
+color PARTICLE_COLOR_END_POS = color(80,120,50);
+String OUTPUT_IMAGE = null;
 //======================================
 
 
@@ -25,7 +25,7 @@ int index;
 float zval_color;
 
 void setup() {
-  size(800, 800);
+  size(1920, 1080);
   frameRate(500);
   blendMode(BLEND);
   background(BACKGROUND_COLOR);
@@ -68,11 +68,11 @@ PVector[] placeParticles(int num){
 }
 
 PVector[] generateFlowfield(){
-  PVector[] field = new PVector[(width*height)];
+  PVector[] field = new PVector[width*height];
   float angle, noise;
   float zval = random(0,100000);
   for (int x=0; x<width; x++){
-    for (int y=0; y<width; y++){
+    for (int y=0; y<height; y++){
       noise = pow((noise(x*PERLIN_SAMPLING_SCALE, y*PERLIN_SAMPLING_SCALE, zval)+0.5f),PERLIN_POW)-0.5f;
       angle = noise*TWO_PI;
       field[x*height+y]=PVector.fromAngle(angle).mult(FORCE);
